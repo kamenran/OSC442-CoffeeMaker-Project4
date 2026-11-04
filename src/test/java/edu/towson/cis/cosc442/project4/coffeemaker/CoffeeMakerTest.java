@@ -214,6 +214,46 @@ class CoffeeMakerTest {
         assertTrue(maker.editRecipe(oldRecipe, newRecipe));
     }
 
+   
+    @Test
+    void addingInventoryIncreasesIngredientQuantities() {
+        Inventory before = maker.checkInventory();
+
+        int coffeeBefore = before.getCoffee();
+        int milkBefore = before.getMilk();
+        int sugarBefore = before.getSugar();
+        int chocolateBefore = before.getChocolate();
+
+        assertTrue(maker.addInventory(3, 4, 0, 5));
+
+        Inventory after = maker.checkInventory();
+
+        assertEquals(coffeeBefore + 3, after.getCoffee());
+        assertEquals(milkBefore + 4, after.getMilk());
+        assertEquals(sugarBefore, after.getSugar());
+        assertEquals(chocolateBefore + 5, after.getChocolate());
+    }
+
+  
+    @Test
+    void makingCoffeeConsumesMilkSugarAndChocolate() {
+        Recipe recipe = createRecipe("Mocha", 50, 0, 2, 3, 4);
+
+        Inventory before = maker.checkInventory();
+
+        int milkBefore = before.getMilk();
+        int sugarBefore = before.getSugar();
+        int chocolateBefore = before.getChocolate();
+
+        assertEquals(25, maker.makeCoffee(recipe, 75));
+
+        Inventory after = maker.checkInventory();
+
+        assertEquals(milkBefore - 2, after.getMilk());
+        assertEquals(sugarBefore - 3, after.getSugar());
+        assertEquals(chocolateBefore - 4, after.getChocolate());
+    }
+
     private boolean containsRecipe(String name) {
         for (Recipe recipe : maker.getRecipes()) {
             if (name.equals(recipe.getName())) {
