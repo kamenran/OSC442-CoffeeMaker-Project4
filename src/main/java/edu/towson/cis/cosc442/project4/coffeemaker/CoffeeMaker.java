@@ -130,10 +130,9 @@ public class CoffeeMaker {
      * 
      * @return the current Inventory object
      */
-    public Inventory checkInventory() {
-        return inventory;
-    }
-
+public Inventory checkInventory() {
+    return null;
+}
     /**
      * Attempts to make coffee with the specified recipe if paid amount is
      * sufficient and ingredients are available.
