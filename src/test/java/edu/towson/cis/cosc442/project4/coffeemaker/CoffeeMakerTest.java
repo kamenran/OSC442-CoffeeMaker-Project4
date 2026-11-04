@@ -214,7 +214,7 @@ class CoffeeMakerTest {
         assertTrue(maker.editRecipe(oldRecipe, newRecipe));
     }
 
-   
+
     @Test
     void addingInventoryIncreasesIngredientQuantities() {
         Inventory before = maker.checkInventory();
@@ -234,7 +234,7 @@ class CoffeeMakerTest {
         assertEquals(chocolateBefore + 5, after.getChocolate());
     }
 
-  
+
     @Test
     void makingCoffeeConsumesMilkSugarAndChocolate() {
         Recipe recipe = createRecipe("Mocha", 50, 0, 2, 3, 4);
